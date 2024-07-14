@@ -36,6 +36,7 @@ public class KhachHangController {
     @PostMapping("kh/add")
     public KhachHang add(@RequestBody KhachHang khachHang){
 //        khachHang.setTrang_thai(TrangThai.HOATDONG);
+        khachHang.setTrang_thai(TrangThai.hoatdong);
       return   khachHangRepo.save(khachHang);
 
     }
