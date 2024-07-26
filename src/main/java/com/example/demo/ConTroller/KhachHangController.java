@@ -2,6 +2,7 @@ package com.example.demo.ConTroller;
 
 import com.example.demo.Entity.KhachHang;
 import com.example.demo.Repo.KhachHangRepo;
+import com.example.demo.Repo.TinhRepo;
 import com.example.demo.enums.GioiTinh;
 import com.example.demo.enums.TrangThai;
 import jakarta.validation.Valid;
@@ -25,6 +26,9 @@ import java.util.UUID;
 public class KhachHangController {
 @Autowired
     KhachHangRepo khachHangRepo;
+    @Autowired
+    TinhRepo tinhRepo;
+
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
@@ -35,8 +39,9 @@ public class KhachHangController {
     }
     @PostMapping("kh/add")
     public KhachHang add(@RequestBody KhachHang khachHang){
-//        khachHang.setTrang_thai(TrangThai.HOATDONG);
-        khachHang.setTrang_thai(TrangThai.hoatdong);
+
+        khachHang.setTrang_thai(TrangThai.HOẠTĐỘNG);
+//         
       return   khachHangRepo.save(khachHang);
 
     }
@@ -44,7 +49,12 @@ public class KhachHangController {
 
    public KhachHang delete(@PathVariable UUID id){
         KhachHang khachHang=khachHangRepo.findById(id).orElse(null);
-       khachHang.setTrang_thai(TrangThai.khonghoatdong);
+
+
+       if (khachHang.getTrang_thai() == TrangThai.HOẠTĐỘNG){ khachHang.setTrang_thai(TrangThai.KHÔNGHOẠTĐỘNG);
+       }
+       else if(khachHang.getTrang_thai() == TrangThai.KHÔNGHOẠTĐỘNG){ khachHang.setTrang_thai(TrangThai.HOẠTĐỘNG);
+       }
     return khachHangRepo.save(khachHang);
 
  }
@@ -66,11 +76,18 @@ public class KhachHangController {
         kh.setNgay_sinh(khachHang.getNgay_sinh());
         kh.setAnh(khachHang.getAnh());
         kh.setGioi_tinh(khachHang.getGioi_tinh());
-
+         kh.setDia_chi(khachHang.getDia_chi());
 
 
         return  khachHangRepo.save(kh);
 
+    }
+    @GetMapping("/timkiem")
+    public ResponseEntity<List<KhachHang>> searchProducts(
+            @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "status", required = false) TrangThai status) {
+        List<KhachHang> result = khachHangRepo.searchByKeywordAndStatus(keyword, status);
+        return ResponseEntity.ok(result);
     }
  }
 

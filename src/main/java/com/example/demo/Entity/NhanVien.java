@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -39,7 +40,7 @@ public class NhanVien {
 
     private String anh;
     private Quyen quyen;
-    private  String ngay_tao;
+    private LocalDate ngay_tao;
     private String  dia_chi;
     private  String manv;
     private TrangThai trang_thai;

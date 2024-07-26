@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.UUID;
 
 @RestController
@@ -26,8 +27,16 @@ public class NhanVienController {
     }
     @PostMapping("nv/add")
     public NhanVien add(@RequestBody NhanVien nhanVien){
-//        khachHang.setTrang_thai(TrangThai.HOATDONG);
-        nhanVien.setTrang_thai(TrangThai.hoatdong);
+
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder randomPart = new StringBuilder();
+        Random random = new Random();
+        int length = 8 + random.nextInt(3);  // Độ dài từ 8 đến 10 ký tự
+        for (int i = 0; i < length; i++) {
+            randomPart.append(characters.charAt(random.nextInt(characters.length())));
+        }
+        nhanVien.setManv("NV"+ randomPart.toString());
+        nhanVien.setTrang_thai(TrangThai.HOẠTĐỘNG);
         return   nhanVienRepo.save(nhanVien);
 
     }
@@ -35,7 +44,11 @@ public class NhanVienController {
 
     public NhanVien delete(@PathVariable UUID id){
         NhanVien nhanVien=nhanVienRepo.findById(id).orElse(null);
-        nhanVien.setTrang_thai(TrangThai.khonghoatdong);
+
+        if (nhanVien.getTrang_thai() == TrangThai.HOẠTĐỘNG){ nhanVien.setTrang_thai(TrangThai.KHÔNGHOẠTĐỘNG);
+        }
+        else if(nhanVien.getTrang_thai() == TrangThai.KHÔNGHOẠTĐỘNG){ nhanVien.setTrang_thai(TrangThai.HOẠTĐỘNG);
+        }
         return nhanVienRepo.save(nhanVien);
 
     }
