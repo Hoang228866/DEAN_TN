@@ -1,5 +1,6 @@
 package com.example.demo.Entity;
 
+import com.example.demo.enums.GioiTinh;
 import com.example.demo.enums.Quyen;
 import com.example.demo.enums.TrangThai;
 import jakarta.persistence.*;
@@ -14,36 +15,34 @@ import java.util.UUID;
 @Table(name = "NHANVIEN")
 public class NhanVien {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-
-    private UUID id;
-
-
-    private String so_dien_thoai;
-
-
-    private String ten_day_du;
-
-
-    private String tai_khoan;
-
-
-    private String mat_khau;
-
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "tendaydu")
+    private String tenDayDu;
+    @Column(name = "sodienthoai")
+    private String sdt;
+    @Column(name = "taikhoan")
+    private String taiKhoan;
+    @Column(name = "matkhau")
+    private String matKhau;
+    @Column(name = "email")
     private String email;
-
-
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
-    @Temporal(TemporalType.DATE)
-    private String ngay_sinh;
-
+    @Column(name = "ngaysinh")
+    private LocalDate ngaySinh;
+    @Column(name = "anh")
     private String anh;
+    @Column(name = "quyen")
     private Quyen quyen;
-    private LocalDate ngay_tao;
-    private String  dia_chi;
-    private  String manv;
-    private TrangThai trang_thai;
+    @Column(name = "gioitinh")
+    private GioiTinh gt;
+    @Column(name = "ngaytao")
+    private  LocalDate ngayTao;
+    @Column(name = "diachi")
+    private String  diaChi;
+    @Column(name = "manv")
+    private  String maNhanVien;
+    @Column(name = "trangthai")
+    private TrangThai trangThai;
 
 
 }

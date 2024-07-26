@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.rmi.server.UID;
 import java.util.UUID;
 
-public interface NhanVienRepo extends JpaRepository<NhanVien, UUID> {
+public interface NhanVienRepo extends JpaRepository<NhanVien, Long> {
 }
