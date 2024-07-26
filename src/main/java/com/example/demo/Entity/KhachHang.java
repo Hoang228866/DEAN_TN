@@ -19,17 +19,17 @@ public class KhachHang {
      @Column(name = "id")
     private UUID id;
 
-    @Column(name = "so_dien_thoai")
-    private String so_dien_thoai;
+    @Column(name = "soDienThoai")
+    private String soDienThoai;
 
-    @Column(name = "ten_day_du")
-    private String ten_day_du;
+    @Column(name = "tenDayDu")
+    private String tenDayDu;
 
-    @Column(name = "tai_khoan")
-    private String tai_khoan;
+    @Column(name = "taiKhoan")
+    private String taiKhoan;
 
-    @Column(name = "mat_khau")
-    private String mat_khau;
+    @Column(name = "matKhau")
+    private String matKhau;
 
     @Column(name = "email")
     private String email;
@@ -37,14 +37,14 @@ public class KhachHang {
 
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     @Temporal(TemporalType.DATE)
-    @Column(name = "ngay_sinh")
-    private String ngay_sinh;
+    @Column(name = "ngaySinh")
+    private String ngaySinh;
     @Column(name = "anh")
     private String anh;
-    @Column(name = "gioi_tinh")
-    private GioiTinh gioi_tinh;
-    @Column(name = "dia_chi")
-    private String dia_chi;
-    @Column(name = "trang_thai")
-    private TrangThai trang_thai;
+    @Column(name = "gioiTinh")
+    private GioiTinh gioiTinh;
+    @Column(name = "diaChi")
+    private String diaChi;
+    @Column(name = "trangThai")
+    private TrangThai trangThai;
 }

@@ -12,10 +12,10 @@ import java.util.UUID;
 
 public interface KhachHangRepo extends JpaRepository<KhachHang, UUID> {
     @Query("SELECT sp FROM KhachHang sp WHERE " +
-            "(:keyword IS NULL OR LOWER(sp.ten_day_du) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "(:keyword IS NULL OR LOWER(sp.tenDayDu) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "CAST(sp.email AS string) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "CAST(sp.dia_chi AS string) LIKE LOWER(CONCAT('%', :keyword, '%'))) " +
-            "AND (:status IS NULL OR sp.trang_thai = :status)")
+            "CAST(sp.diaChi AS string) LIKE LOWER(CONCAT('%', :keyword, '%'))) " +
+            "AND (:status IS NULL OR sp.trangThai = :status)")
     List<KhachHang> searchByKeywordAndStatus(
             @Param("keyword") String keyword,
             @Param("status") TrangThai status);

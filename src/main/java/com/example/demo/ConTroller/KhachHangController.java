@@ -40,7 +40,7 @@ public class KhachHangController {
     @PostMapping("kh/add")
     public KhachHang add(@RequestBody KhachHang khachHang){
 
-        khachHang.setTrang_thai(TrangThai.HOẠTĐỘNG);
+        khachHang.setTrangThai(TrangThai.HOẠTĐỘNG);
 //         
       return   khachHangRepo.save(khachHang);
 
@@ -51,9 +51,9 @@ public class KhachHangController {
         KhachHang khachHang=khachHangRepo.findById(id).orElse(null);
 
 
-       if (khachHang.getTrang_thai() == TrangThai.HOẠTĐỘNG){ khachHang.setTrang_thai(TrangThai.KHÔNGHOẠTĐỘNG);
+       if (khachHang.getTrangThai() == TrangThai.HOẠTĐỘNG){ khachHang.setTrangThai(TrangThai.KHÔNGHOẠTĐỘNG);
        }
-       else if(khachHang.getTrang_thai() == TrangThai.KHÔNGHOẠTĐỘNG){ khachHang.setTrang_thai(TrangThai.HOẠTĐỘNG);
+       else if(khachHang.getTrangThai() == TrangThai.KHÔNGHOẠTĐỘNG){ khachHang.setTrangThai(TrangThai.HOẠTĐỘNG);
        }
     return khachHangRepo.save(khachHang);
 
@@ -68,15 +68,15 @@ public class KhachHangController {
     @PutMapping("/kh/update/{id}")
     public KhachHang update( @RequestBody KhachHang khachHang , @PathVariable  UUID id){
         KhachHang kh = khachHangRepo.findById(id).orElse(null);
-        kh.setSo_dien_thoai(khachHang.getSo_dien_thoai());
-        kh.setTen_day_du(khachHang.getTen_day_du());
-        kh.setTai_khoan(khachHang.getTai_khoan());
-        kh.setMat_khau(khachHang.getMat_khau());
+        kh.setSoDienThoai(khachHang.getSoDienThoai());
+        kh.setTenDayDu(khachHang.getTenDayDu());
+        kh.setTaiKhoan(khachHang.getTaiKhoan());
+        kh.setMatKhau(khachHang.getMatKhau());
         kh.setEmail(khachHang.getEmail());
-        kh.setNgay_sinh(khachHang.getNgay_sinh());
+        kh.setNgaySinh(khachHang.getNgaySinh());
         kh.setAnh(khachHang.getAnh());
-        kh.setGioi_tinh(khachHang.getGioi_tinh());
-         kh.setDia_chi(khachHang.getDia_chi());
+        kh.setGioiTinh(khachHang.getGioiTinh());
+         kh.setDiaChi(khachHang.getDiaChi());
 
 
         return  khachHangRepo.save(kh);
