@@ -2,21 +2,15 @@ package com.example.demo.ConTroller;
 
 import com.example.demo.Entity.KhachHang;
 import com.example.demo.Repo.KhachHangRepo;
-import com.example.demo.Repo.TinhRepo;
-import com.example.demo.enums.GioiTinh;
 import com.example.demo.enums.TrangThai;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.Binding;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 //@Controller
@@ -26,8 +20,8 @@ import java.util.UUID;
 public class KhachHangController {
 @Autowired
     KhachHangRepo khachHangRepo;
-    @Autowired
-    TinhRepo tinhRepo;
+
+
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -39,6 +33,17 @@ public class KhachHangController {
     }
     @PostMapping("kh/add")
     public KhachHang add(@RequestBody KhachHang khachHang){
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder randomPart = new StringBuilder();
+        Random random = new Random();
+        int length = 8 + random.nextInt(3);  // Độ dài từ 8 đến 10 ký tự
+        for (int i = 0; i < length; i++) {
+            randomPart.append(characters.charAt(random.nextInt(characters.length())));
+        }
+        khachHang.setMatKhau("MK"+ randomPart.toString());
+
+//        sendPasswordEmail("tienle3203@gmail.com", randomPart.toString());
+
 
         khachHang.setTrangThai(TrangThai.HOẠTĐỘNG);
 //         
